@@ -205,6 +205,7 @@ Floating point numbers are stored in a struct R_flstr
 The fractional part is often called the mantissa.
 
 The structure consists of
+
 	a flag for the sign of the factional part
 	the exponent in binary 
 	a character string containing the fractional part
@@ -213,6 +214,7 @@ The structure could be converted to a float via
 	atof(strcat(".",mantissa)) * (10^exponent)
 
 To be properly formed, the mantissa string must:
+
 	start with a digit between 1 and 9 (i.e. no leading zeros)
 		except for the zero, in which case the mantissa is exactly "0"
 	for the special case of zero, the exponent is always 0, and the
@@ -224,53 +226,48 @@ between 0.1 (inclusive) and 1.0 (exclusive).
 The exponent is interpreted as a power of 10.
 
 Lines 
-there are three sets of lines:
-implemented in line.c and line.h
-	real_lines --
-	  the lines as they come from the file
-	content_lines --
-	  a subset of reallines that excluding embedded commands
-implemented in token.c and token.h 
-	token_lines --
-	  a subset of content_lines consisting of those lines that
-		have tokens that begin on them (literals can go on for
-		more than one line)
-		i.e. content_lines excluding comments and blank lines.
 
+There are three sets of lines: implemented in line.c and line.h
+
+* real_lines -- the lines as they come from the file
+* content_lines -- a subset of reallines that excluding embedded commands
+implemented in token.c and token.h 
+* token_lines -- a subset of content_lines consisting of those lines that
+have tokens that begin on them (literals can go on for more than one line)
+i.e. content_lines excluding comments and blank lines.
 
 === THE STATE OF THE CODE
 
-Things that should be added:
+==== Things that should be added:
 
-	visual mode should handle tabs and wrapped lines
-	handling huge files in chunks when in using the ordinal match
-	algorithm. right now you have to parse and then diff the
-	whole thing before you get any output.  often, you run out of memory.
+* visual mode should handle tabs and wrapped lines
+handling huge files in chunks when in using the ordinal match
+algorithm. Right now you have to parse and then diff the
+whole thing before you get any output.
+Often, you run out of memory.
 
-Things that would be nice to add:
+==== Things that would be nice to add:
 
-	output should optionally be expressed in real line numbers
-		(i.e. including command lines)
-	at present, all storage is in core. there should
-		be a compile time decision to allow temporary storage
-		in files rather than core. 
-		that way the user could decide how to handle the
-			speed/space tradeoff
-	a front end that looked like diff should be added so that
-		one could drop spiff into existing shell scripts
-	the parser converts floats into their internal form even when
-		it isn't necessary.
-	in the miller/myer code, the code should check for matching
-		end sequences.  it currently looks matching beginning
-		sequences.
+* output should optionally be expressed in real line numbers
+	(i.e. including command lines)
+* at present, all storage is in memory; there should
+	be a compile time decision to allow temporary storage in files rather than core. 
+	That way the user could decide how to handle the speed/space tradeoff
+* a front end that looked like diff should be added so that
+	one could drop spiff into existing shell scripts
+* the parser converts floats into their internal form even when
+	it isn't necessary.
+* in the miller/myer code, the code should check for matching
+	end sequences.  it currently looks matching beginning sequences.
 
 === Minor programming improvements (programming botches)
-	some of the #defines should really be enumerated types
-	all the routines in strings.c that alter the data at the end of
-		a pointer but return void should just return the correct
-		data. the current arrangement is a historical artifact
-		of the days when these routines returned a status code.
-		but then the code was never examined,
-		so i made them void . . .
-	comments should be added to the miller/myer code
-	in visual mode, ask for font by name rather than number
+
+* some of the #defines should really be enumerated types
+* all the routines in strings.c that alter the data at the end of
+	a pointer but return void should just return the correct
+	data. the current arrangement is a historical artifact
+	of the days when these routines returned a status code.
+	but then the code was never examined,
+	so i made them void . . .
+* comments should be added to the miller/myer code
+in visual mode, ask for font by name rather than number
