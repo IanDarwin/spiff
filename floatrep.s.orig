@@ -1,0 +1,34 @@
+|NO_APP
+.data
+_rcsid:
+	.ascii "$Header: floatrep.c,v 1.1 88/09/15 11:34:00 daniel Rel $\0"
+.text
+	.even
+.globl _R_makefloat
+_R_makefloat:
+	link a6,#-8
+	tstb sp@(-144)
+	moveml #0xc00,a6@(-8)
+|	end prologue
+	pea 12:w
+	lea __Z_myalloc,a3
+	jbsr a3@
+	movel d0,a2
+	pea 200:w
+	jbsr a3@
+	movel d0,a2@(8)
+	movel a2,d0
+	moveml a6@(-8),#0xc00
+	unlk a6
+	rts
+	.even
+.globl _R_getexp
+_R_getexp:
+	link a6,#0
+	tstb sp@(-144)
+|	end prologue
+	movel a6@(8),a0
+	movel a0@,d0
+	moveml a6@(-0),#0x0
+	unlk a6
+	rts
