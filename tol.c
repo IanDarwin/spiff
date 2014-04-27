@@ -11,6 +11,7 @@
 static char rcsid[]= "$Header: tol.c,v 1.1 88/09/15 11:33:59 daniel Rel $";
 #endif
 
+#include <stdio.h>
 #include "misc.h"
 #include "float.h"
 #include "tol.h"

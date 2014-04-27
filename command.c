@@ -12,6 +12,7 @@ static char rcsid[]= "$Header: /home/ian/ports/textproc/spiff/work/spiff-1.0/RCS
 #endif
 
 
+#include <string.h>
 #include "misc.h"
 #include "tol.h"
 #include "comment.h"
@@ -172,17 +173,17 @@ C_clear_cmd()
 }
 
 int
-C_is_cmd(inline)
-char *inline;
+C_is_cmd(input_line)
+char *input_line;
 {
 	char *ptr;
 	/*
 	**	see if this is a command line
 	**	and if so, do the command right away
 	*/
-	if (('\0' != _C_cmdword[0]) && (!S_wordcmp(inline,_C_cmdword)))
+	if (('\0' != _C_cmdword[0]) && (!S_wordcmp(input_line,_C_cmdword)))
 	{
-		ptr = inline;
+		ptr = input_line;
 		S_nextword(&ptr);
 		_C_do_a_cmd(ptr);
 		return(1);

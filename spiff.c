@@ -13,6 +13,7 @@ static char rcsid[]= "$Header: spiff.c,v 1.1 88/09/15 11:33:51 daniel Rel $";
 
 
 #include <stdio.h>
+#include <string.h>
 #include "misc.h"
 #include "flagdefs.h"
 #include "parse.h"
@@ -27,7 +28,8 @@ static char rcsid[]= "$Header: spiff.c,v 1.1 88/09/15 11:33:51 daniel Rel $";
 #include "visual.h"
 #include "output.h"
 
-extern void _Y_doargs();
+static void _Y_doargs(int argc, char *argv[], char **file1, 
+	char **file2, int *max_d);
 
 static int _Y_eflag = 0;	/* use exact match algorithm */
 static int _Y_vflag = 0;	/* use visual mode */
@@ -38,9 +40,8 @@ static int _Y_vflag = 0;	/* use visual mode */
 */
 static int _Y_flags;
 
-main(argc,argv)
-int argc;
-char *argv[];
+int
+main(int argc, char *argv[])
 {
 	E_edit edit_end;
 	char *filename[2];
@@ -120,9 +121,9 @@ char *argv[];
 	if (E_NULL != edit_end)
 	{
 		O_output(edit_end,_Y_flags);
-		return(1);
+		return 1;
 	}
-	return(0);
+	return 0;
 }
 
 /*
@@ -174,11 +175,7 @@ char *from;
 #define SETPTR	{if(strlen(argv[1]) == 2) {argv++;argc--;ptr=argv[1];}else ptr=(&argv[1][2]);}
 
 static void
-_Y_doargs(argc,argv,file1,file2,max_d)
-int argc;
-char *argv[];
-char **file1,**file2;
-int *max_d;
+_Y_doargs(int argc, char *argv[], char **file1, char **file2, int *max_d)
 {
 	char *ptr;
 

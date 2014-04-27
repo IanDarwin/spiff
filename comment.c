@@ -12,6 +12,7 @@ static char rcsid[]= "$Header: comment.c,v 1.1 88/09/15 11:33:58 daniel Rel $";
 #endif
 
 
+#include <string.h>
 #include "misc.h"
 #include "comment.h"
 #include "strings.h"

@@ -12,6 +12,8 @@ static char rcsid[]= "$Header: float.c,v 1.1 88/09/15 11:33:53 daniel Rel $";
 #endif
 
 #include <ctype.h>
+#include <stdio.h>
+#include <string.h>
 #include "misc.h"
 #include "floatrep.h"
 #include "float.h"

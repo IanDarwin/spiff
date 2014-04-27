@@ -18,21 +18,21 @@ INSDIR=/usr/local/bin
 #		choose a) b) or c)
 #
 # a) for BSD derivitives, enable the following line
-#OSFLAG=
+OSFLAG=
 
 # b) for XENIX systems, enable the following line
 #OSFLAG=-DXENIX
 
 # b) for other A.T.&T. UNIX derivitives, enable the following line
-OSFLAG=-DATT
+#OSFLAG=-DATT
 
 #
 # 	2) SELECTION OF TERMINAL CONTROL LIBRARY
 #		choose either of a) b) or c)
 #
 # a) if you use termcap, enable the following lines
-#TFLAG=-DM_TERMCAP
-#TLIB=termcap
+TFLAG=-DM_TERMCAP
+TLIB=ncurses
 
 # b) if you are using terminfo on a XENIX machine, enable the following lines
 #TFLAG=-DM_TERMINFO
@@ -75,14 +75,15 @@ OBJ= spiff.o output.o compare.o float.o strings.o exact.o miller.o parse.o comma
 CFILES= spiff.c output.c compare.c float.c strings.c exact.c miller.c parse.c command.c comment.c tol.c line.c floatrep.c token.c misc.c visual.c
 HFILES=misc.h strings.h line.h float.h floatrep.h tol.h command.h comment.h token.h edit.h parse.h compare.h flagdefs.h exact.h miller.h visual.h output.h
 OTHER=README Makefile Sample.1 Sample.2 Sample.3 Sample.4 paper.ms paper.out
+
 MANPAGE=spiff.1
 
 # disable this line iff you like being honked at.
 DEFS = -DNOCHATTER
 
-CFLAGS=-O $(OSFLAG) $(TFLAG) $(VISFLAG) $(DEFS)
+CFLAGS+=$(OSFLAG) $(TFLAG) $(VISFLAG) $(DEFS)
 
-default: spiff
+all: spiff
 
 spiff: $(OBJ)
 	$(CC) $(CFLAGS) -o spiff $(OBJ) $(VISLIB) -l$(TLIB)
@@ -95,7 +96,6 @@ visual.o: visual.c misc.h visual.h $(MGRINCS)
 misc.o: misc.c visual.h misc.h
 
 parse.o:  parse.c misc.h line.h command.h float.h tol.h comment.h parse.h token.h flagdefs.h
-	@echo compiler may report 4 statement not reached warning messages for parse.c
 	$(CC) $(CFLAGS) -c parse.c
 
 command.o: command.c float.h tol.h misc.h
@@ -107,7 +107,6 @@ tol.o: tol.c tol.h float.h
 output.o: output.c output.h misc.h edit.h flagdefs.h
 
 compare.o: compare.c misc.h strings.h float.h tol.h token.h line.h compare.h flagdefs.h
-	@echo compiler may report 1 statement not reached warning message for compare.c
 	$(CC) $(CFLAGS) -c compare.c
 
 float.o: float.c misc.h strings.h float.h floatrep.h
