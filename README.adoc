@@ -51,20 +51,21 @@ This was developed in the late 1980's by Daniel Nachbar at BellCore
 
 	4) Share and enjoy.
 
-AUTHOR'S ADDRESS
-	Please send complaints, comments, praise, bug reports, etc to
+=== AUTHOR'S ADDRESS
+
+In 1988 you could send complaints, comments, praise, bug reports, etc to
+	
 		Dan Nachbar
 		Bell Communications Research  (also known as BELLCORE)
 		445 South St. Room 2B-389
 		Morristown, NJ 07960
 
-			nachbar@bellcore.com
-		or
-			bellcore!nachbar
-		or
-			(201) 829-4392  (praise only, please)
+		nachbar@bellcore.com
 
-OVERVIEW OF OPERATION
+	
+I doubt that any of these contact points still work!
+
+=== OVERVIEW OF OPERATION
 
 Each of two input files is read and stored in core.
 Then it is parsed into a series of tokens (literal strings and
@@ -74,7 +75,8 @@ After both files have been parsed, a differencing algorithm is applied to
 the token sequences.  The differencing algorithm
 produces an edit script, which is then passed to an output routine.
 
-SIZE LIMITS AND OTHER DEFAULTS
+.SIZE LIMITS AND OTHER DEFAULTS
+----
 		file implementing limit		name		default value
 maximum number of lines		lines.h		_L_MAXLINES	10000
 	per file
@@ -109,9 +111,10 @@ maximum number of literal	comment.h	W_LITMAX	   20
 maximum number of tolerances	tol.h		_T_TOLMAX	   10
  that can be in effect at one
  time
+----
 
 
-DIFFERENCES BETWEEN THE CURRENT VERSION AND THE ENCLOSED PAPER
+=== DIFFERENCES BETWEEN THE CURRENT VERSION AND THE ENCLOSED PAPER
 
 The files paper.ms and paper.out contain the nroff -ms input and
 output respectively of a paper on spiff that was given the Summer '88
@@ -125,7 +128,7 @@ in terms of individual tokens.  The -t flag controls how the edit script
 is printed.  This arrangement more closely reflects the original intent
 of having multiple differencing granularities. 
 
-PERFORMANCE
+=== PERFORMANCE
 
 Spiff is big and slow.  It is big because all the storage is
 in core.  It is a straightforward but boring task to move the temporary
@@ -136,7 +139,7 @@ As the program matures it will almost certainly get smaller and faster.
 Obvious performance enhancements have been avoided in order to make the
 program available as soon as possible.
 
-COPYRIGHT
+=== COPYRIGHT
 
 Our lawyers advise the following:
 
@@ -151,7 +154,7 @@ Given that all of the above seems to be very reasonable, there should be no
 reason for anyone to not play by the rules.
 
 
-NAMING CONVENTIONS USED IN THE CODE
+=== NAMING CONVENTIONS USED IN THE CODE
 
 All symbols (functions, data declarations, macros) are named as follows:
 
@@ -161,7 +164,7 @@ All symbols (functions, data declarations, macros) are named as follows:
 			within a module
 	foo	-- for names used inside a single routine.
 
-Each module uses a different value for "L" -- 
+	Each module uses a different value for "L" -- 
 	module files	   letter used     implements
 	spiff.c			Y	top level routines
 	misc.[ch]		Z	various routines used throughout
@@ -194,7 +197,7 @@ I haven't cleaned up visual.c yet.  It probably doesn't even compile
 in this version anyway. But since most people don't have mgr, this
 isn't urgent.
 
-NON-OBVIOUS DATA STRUCTURES
+=== NON-OBVIOUS DATA STRUCTURES
 
 The Floating Point Representation
 
@@ -235,14 +238,17 @@ implemented in token.c and token.h
 		i.e. content_lines excluding comments and blank lines.
 
 
-THE STATE OF THE CODE
-Things that should be added
+=== THE STATE OF THE CODE
+
+Things that should be added:
+
 	visual mode should handle tabs and wrapped lines
 	handling huge files in chunks when in using the ordinal match
 	algorithm. right now you have to parse and then diff the
 	whole thing before you get any output.  often, you run out of memory.
 
-Things that would be nice to add
+Things that would be nice to add:
+
 	output should optionally be expressed in real line numbers
 		(i.e. including command lines)
 	at present, all storage is in core. there should
@@ -258,7 +264,7 @@ Things that would be nice to add
 		end sequences.  it currently looks matching beginning
 		sequences.
 
-Minor programming improvements (programming botches)
+=== Minor programming improvements (programming botches)
 	some of the #defines should really be enumerated types
 	all the routines in strings.c that alter the data at the end of
 		a pointer but return void should just return the correct
