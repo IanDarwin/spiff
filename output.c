@@ -46,7 +46,7 @@ _O_st_init()
 {
 	char termn[Z_WORDLEN];
 #ifdef M_TERMCAP
-	static	char entry[1024];
+	static	char entry[32767];
 #endif
 
 	/*

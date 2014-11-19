@@ -293,8 +293,8 @@ the new default tolerance.  Typing
 .SH LIMITS
 Each input files can be no longer that 10,000 line long or contain more
 than 50,000 tokens. Longer files will be truncated.
-No line can be longer than 1024 characters.  Newlines
-will be inserted every 1024 character.
+No line can be longer than Z_LINELEN characters.  Newlines
+will be inserted every that many characters.
 .SH EXAMPLES
 .TP
 spiff \-e \-d foo bar

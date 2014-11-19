@@ -18,7 +18,7 @@
 #endif
 #endif
 
-#define	Z_LINELEN	1024
+#define	Z_LINELEN	32767
 #define	Z_WORDLEN	  20
 
 extern char Z_err_buf[];

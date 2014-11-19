@@ -7,7 +7,7 @@
 #	name of the directory into which the binary should be installed
 #		used only when you use  'make install'
 #
-INSDIR=/usr/local/bin
+INSDIR=/usr/local
 
 #
 #	choose one from each of 1) 2) and 3) below
